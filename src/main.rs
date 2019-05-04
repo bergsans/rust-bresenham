@@ -17,8 +17,14 @@ impl PartialEq for Point {
 
 fn main() {
     //let result = get_coordinates(1, 1, 69, 28);
-    let result = get_coordinates(10, 10, 1, 20);
-    draw_line(result, 70, 30);
+    let result1 = get_coordinates(10, 10, 1, 20);
+    draw_line(result1, 70, 30);
+
+    let result2 = get_coordinates(1, 1, 69, 28);
+    draw_line(result2, 70, 30);
+
+    let result3 = get_coordinates(1, 28, 30, 15);
+    draw_line(result3, 70, 30);
 }
 
 fn get_coordinates(x1: i32, y1: i32, x2: i32, y2: i32) -> Vec<Point> {
@@ -44,7 +50,7 @@ fn get_coordinates(x1: i32, y1: i32, x2: i32, y2: i32) -> Vec<Point> {
     let mut current_y:i32 = y1;
     coordinates.push(Point { x: current_x, y: current_y });
     while current_x != x2 && current_y != y2 {
-        println!("x: {} y: {}", current_x, current_y);
+        //println!("x: {} y: {}", current_x, current_y);
         let error2:i32 = 2 * error;
         if error2 >= i32::abs(dy) {
             error -= dy;
@@ -56,7 +62,7 @@ fn get_coordinates(x1: i32, y1: i32, x2: i32, y2: i32) -> Vec<Point> {
             coordinates.push(Point { x: current_x, y: current_y });
         }
     }
-    println!("{:?}", coordinates);
+  //  println!("{:?}", coordinates);
     coordinates
 }
 
@@ -64,7 +70,7 @@ fn draw_line(line: std::vec::Vec<Point>, width: i32, height: i32) {
     //println!("{:?}", line);
 
     let total_n_points = line.len();
-    println!("{}", total_n_points);
+//    println!("{}", total_n_points);
     let mut this_point = 0;  
 
     for col in 0..height {
