@@ -5,7 +5,7 @@ struct Point {
 }
 
 fn main() {
-    let result = get_coordinates(1, 1, 5, 5);
+    let result = get_coordinates(10, 1, 23, 10);
     draw_line(result, 70, 30);
 }
 
@@ -47,7 +47,6 @@ fn get_coordinates(x1: i32, y1: i32, x2: i32, y2: i32) -> Vec<Point> {
 }
 
 fn draw_line(line: std::vec::Vec<Point>, width: i32, height: i32) {
-
     let total_n_points = line.len();
     let mut this_point = 0;  
 
@@ -57,9 +56,11 @@ fn draw_line(line: std::vec::Vec<Point>, width: i32, height: i32) {
         for row in 0..width {
 
             if this_point < total_n_points && line[this_point].x == row && line[this_point].y == col {
-                col_as_string = format!("{}{}", col_as_string, "x");
+                col_as_string = format!("{}{}", col_as_string, "❖");
                // println!("{:?}", line[this_point]);
                 this_point += 1;
+            } else if col == 0 || col == (height - 1) || row == 0 || row == (width - 1) {
+                col_as_string = format!("{}{}", col_as_string, "☗");
             } else {
                 col_as_string = format!("{}{}", col_as_string, ".");
             }
@@ -80,9 +81,11 @@ fn draw_line(line: std::vec::Vec<Point>, width: i32, height: i32) {
 #[cfg(test)]
 mod tests {
    use super::*;
- 
+
+    // doesn't work
     #[test]
-    fn test_add() {
-        assert!(get_coordinates(1, 1, 3, 3), [Point { x: 1, y: 1 }, Point { x: 1, y: 2 }, Point { x: 2, y: 2 }, Point { x: 2, y: 3 }]);
+    fn test_coords() {
+        //let result = get_coordinates(1, 1, 3, 3);
+        assert_eq!(get_coordinates(1, 1, 3, 3), [Point { x: 1, y: 1 }, Point { x: 1, y: 2 }, Point { x: 2, y: 2 }, Point { x: 2, y: 3 }, Point { x: 3, y: 3 }, Point { x: 3, y: 4 }, Point { x: 4, y: 4 }, Point { x: 4, y: 5 }]);
     }
 }
