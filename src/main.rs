@@ -76,17 +76,5 @@ fn draw_line(mut line: std::vec::Vec<Point>, width: i32, height: i32) {
             }
         }
         println!("{}", col_as_string);
-    
-}
-
-#[cfg(test)]
-mod tests {
-   use super::*;
-
-    // doesn't work
-    #[test]
-    fn test_coords() {
-        let result = get_coordinates(1, 1, 2, 2);
-     //   assert!(get_coordinates(1, 1, 2, 2), [Point { x: 1, y: 1 }, Point { x: 1, y: 2 }, Point { x: 2, y: 2 }, Point { x: 2, y: 3 }]);
     }
 }
