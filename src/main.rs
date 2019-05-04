@@ -16,7 +16,7 @@ impl PartialEq for Point {
 */
 
 fn main() {
-    let result = get_coordinates(1, 1, 3, 3);
+    let result = get_coordinates(1, 1, 69, 28);
     draw_line(result, 70, 30);
 }
 
@@ -99,6 +99,6 @@ mod tests {
     #[test]
     fn test_coords() {
         let result = get_coordinates(1, 1, 2, 2);
-     //   assert!(get_coordinates(1, 1, 2, 2) == [Point { x: 1, y: 1 }, Point { x: 1, y: 2 }, Point { x: 2, y: 2 }, Point { x: 2, y: 3 }]);
+     //   assert!(get_coordinates(1, 1, 2, 2), [Point { x: 1, y: 1 }, Point { x: 1, y: 2 }, Point { x: 2, y: 2 }, Point { x: 2, y: 3 }]);
     }
 }
