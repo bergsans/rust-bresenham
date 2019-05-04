@@ -1,11 +1,22 @@
-#[derive(Debug)]
+//use std::cmp::PartialEq;
+//#[derive(Debug)]
+
+
 struct Point {
     x: i32,
     y: i32
 }
+/*
+#[derive(PartialEq)]
+impl PartialEq for Point {
+    fn eq(&self, other: &Point) -> bool {
+        self.x == other.x && self.y == other.y
+    }
+}
+*/
 
 fn main() {
-    let result = get_coordinates(20, 1, 23, 10);
+    let result = get_coordinates(1, 1, 3, 3);
     draw_line(result, 70, 30);
 }
 
@@ -47,6 +58,8 @@ fn get_coordinates(x1: i32, y1: i32, x2: i32, y2: i32) -> Vec<Point> {
 }
 
 fn draw_line(line: std::vec::Vec<Point>, width: i32, height: i32) {
+    //println!("{:?}", line);
+
     let total_n_points = line.len();
     let mut this_point = 0;  
 
@@ -85,6 +98,7 @@ mod tests {
     // doesn't work
     #[test]
     fn test_coords() {
-
+        let result = get_coordinates(1, 1, 2, 2);
+     //   assert!(get_coordinates(1, 1, 2, 2) == [Point { x: 1, y: 1 }, Point { x: 1, y: 2 }, Point { x: 2, y: 2 }, Point { x: 2, y: 3 }]);
     }
 }
