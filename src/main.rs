@@ -5,9 +5,8 @@ struct Point {
 }
 
 fn main() {
-    let result = get_coordinates(1, 1, 10, 10);
-    draw_line(result);
-    //println!("{:?}", result);
+    let result = get_coordinates(1, 1, 5, 5);
+    draw_line(result, 70, 30);
 }
 
 fn get_coordinates(x1: i32, y1: i32, x2: i32, y2: i32) -> Vec<Point> {
@@ -47,17 +46,35 @@ fn get_coordinates(x1: i32, y1: i32, x2: i32, y2: i32) -> Vec<Point> {
     coordinates
 }
 
-fn draw_line(line: std::vec::Vec<Point>) {
-  
+fn draw_line(line: std::vec::Vec<Point>, width: i32, height: i32) {
+
+    let total_n_points = line.len();
+    let mut this_point = 0;  
+
+    for col in 0..height {
+        let mut col_as_string: String = "".to_string();
+
+        for row in 0..width {
+
+            if this_point < total_n_points && line[this_point].x == row && line[this_point].y == col {
+                col_as_string = format!("{}{}", col_as_string, "x");
+               // println!("{:?}", line[this_point]);
+                this_point += 1;
+            } else {
+                col_as_string = format!("{}{}", col_as_string, ".");
+            }
+        }
+        println!("{}", col_as_string);
+
+    }
+
+/*
     for point in line.iter() {
         let point_x:usize = point.x as usize;
-        let string_before = " ".repeat(point_x);
-     
-       
+        let string_before = " ".repeat(point_x);  
         println!("{}x", string_before);   
-    }        
-
-    println!("{:?}", line);
+    }
+*/
 }
 
 #[cfg(test)]
