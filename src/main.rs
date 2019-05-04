@@ -54,20 +54,17 @@ fn get_coordinates(x1: i32, y1: i32, x2: i32, y2: i32) -> Vec<Point> {
     coordinates
 }
 
-fn draw_line(line: std::vec::Vec<Point>, width: i32, height: i32) {
-
-    let total_n_points = line.len();
-    let mut this_point = 0;  
+fn draw_line(mut line: std::vec::Vec<Point>, width: i32, height: i32) {
 
     for col in 0..height {
         let mut col_as_string: String = "".to_string();
         for row in 0..width {
             let mut is_there_a_point = false;
-            for i in this_point..total_n_points {
+            for i in 0..line.len() {
                 if line[i].x == row && line[i].y == col {
                     col_as_string = format!("{}{}", col_as_string, "❖");
                     is_there_a_point = true;
-                    this_point += 1;
+                    line.remove(i);
                     break;
                 } 
             }
@@ -79,15 +76,7 @@ fn draw_line(line: std::vec::Vec<Point>, width: i32, height: i32) {
             }
         }
         println!("{}", col_as_string);
-    }
-
-/*
-    for point in line.iter() {
-        let point_x:usize = point.x as usize;
-        let string_before = " ".repeat(point_x);  
-        println!("{}x", string_before);   
-    }
-*/
+    
 }
 
 #[cfg(test)]
