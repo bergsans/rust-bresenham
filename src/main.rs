@@ -1,9 +1,16 @@
+#[derive(Debug)]
+struct Point {
+    pos: [i32; 2]
+}
+
+
 fn main() {
-    let mut coordinates = Vec::new();
-    let x1:i32 = 1;
-    let y1:i32 = 1;
-    let x2:i32 = 10;
-    let y2:i32 = 5;
+    let result = get_coordinates(1, 1, 10, 5);
+    println!("{:?}", result);
+}
+
+fn get_coordinates(x1: i32, y1: i32, x2: i32, y2: i32) -> Vec<Point> { //-> std::vec::Vec<i32>
+    let mut coordinates = vec![];  //Vec::new();
     let dx:i32 = i32::abs(x2 - x1);
     let dy:i32 = i32::abs(y2 - y1);
     let sx:i32 = {
@@ -24,7 +31,7 @@ fn main() {
     let mut current_x:i32 = x1;
     let mut current_y:i32 = y1;
     while current_x != x2 && current_y != y2 {
-        coordinates.push([current_x, current_y]);
+        coordinates.push(Point {pos: [current_x, current_y]});
         let error2:i32 = 2 * error;
         if error2 > i32::abs(dy) {
             error -= dy;
@@ -34,5 +41,6 @@ fn main() {
             current_y += sy;
         }
     }
-    println!("{:?}", coordinates);
+    //println!("{:?}", coordinates);
+    coordinates
 }
