@@ -5,8 +5,9 @@ struct Point {
 }
 
 fn main() {
-    let result = get_coordinates(1, 1, 3, 3);
-    println!("{:?}", result);
+    let result = get_coordinates(1, 1, 10, 10);
+    draw_line(result);
+    //println!("{:?}", result);
 }
 
 fn get_coordinates(x1: i32, y1: i32, x2: i32, y2: i32) -> Vec<Point> {
@@ -44,6 +45,19 @@ fn get_coordinates(x1: i32, y1: i32, x2: i32, y2: i32) -> Vec<Point> {
         coordinates.push(Point { x: current_x, y: current_y });
     }
     coordinates
+}
+
+fn draw_line(line: std::vec::Vec<Point>) {
+  
+    for point in line.iter() {
+        let point_x:usize = point.x as usize;
+        let string_before = " ".repeat(point_x);
+     
+       
+        println!("{}x", string_before);   
+    }        
+
+    println!("{:?}", line);
 }
 
 #[cfg(test)]
