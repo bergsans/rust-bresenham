@@ -52,6 +52,6 @@ mod tests {
  
     #[test]
     fn test_add() {
-        assert!(get_coordinates(1, 1, 3, 3), [Point { pos: [1, 1] }, Point { pos: [1, 2] }, Point { pos: [2, 2] }, Point { pos: [2, 3] }]);
+        assert!(get_coordinates(1, 1, 3, 3), [Point { x: 1, y: 1 }, Point { x: 1, y: 2 }, Point { x: 2, y: 2 }, Point { x: 2, y: 3 }]);
     }
 }
