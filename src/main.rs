@@ -1,5 +1,3 @@
-//#[derive(Debug)]
-
 struct Point {
     x: i32,
     y: i32
@@ -7,14 +5,14 @@ struct Point {
 
 fn main() {
     
-    let result1 = get_coordinates(10, 10, 1, 20);
-    draw_line(result1, 70, 30);
+ //   let result1 = get_coordinates(10, 10, 1, 20);
+ //   draw_line(result1, 70, 30);
 
     let result2 = get_coordinates(1, 1, 69, 28);
     draw_line(result2, 70, 30);
 
-    let result3 = get_coordinates(1, 28, 30, 15);
-    draw_line(result3, 70, 30);
+ //   let result3 = get_coordinates(1, 28, 30, 15);
+ //   draw_line(result3, 70, 30);
 }
 
 fn get_coordinates(x1: i32, y1: i32, x2: i32, y2: i32) -> Vec<Point> {
@@ -55,7 +53,6 @@ fn get_coordinates(x1: i32, y1: i32, x2: i32, y2: i32) -> Vec<Point> {
 }
 
 fn draw_line(mut line: std::vec::Vec<Point>, width: i32, height: i32) {
-
     for col in 0..height {
         let mut col_as_string: String = "".to_string();
         for row in 0..width {
@@ -68,7 +65,6 @@ fn draw_line(mut line: std::vec::Vec<Point>, width: i32, height: i32) {
                     break;
                 } 
             }
-
             if col == 0 || col == (height - 1) || row == 0 || row == (width - 1) {
                 col_as_string = format!("{}{}", col_as_string, "☗");
             } else if is_there_a_point == false {
