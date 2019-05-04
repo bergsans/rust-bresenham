@@ -1,5 +1,5 @@
 //use std::cmp::PartialEq;
-//#[derive(Debug)]
+#[derive(Debug)]
 
 
 struct Point {
@@ -16,7 +16,8 @@ impl PartialEq for Point {
 */
 
 fn main() {
-    let result = get_coordinates(1, 1, 69, 28);
+    //let result = get_coordinates(1, 1, 69, 28);
+    let result = get_coordinates(10, 10, 1, 20);
     draw_line(result, 70, 30);
 }
 
@@ -43,17 +44,19 @@ fn get_coordinates(x1: i32, y1: i32, x2: i32, y2: i32) -> Vec<Point> {
     let mut current_y:i32 = y1;
     coordinates.push(Point { x: current_x, y: current_y });
     while current_x != x2 && current_y != y2 {
-        
+        println!("x: {} y: {}", current_x, current_y);
         let error2:i32 = 2 * error;
-        if error2 > i32::abs(dy) {
+        if error2 >= i32::abs(dy) {
             error -= dy;
             current_x += sx;
-        } else if error2 < dx {
+            coordinates.push(Point { x: current_x, y: current_y });
+        } else if error2 <= i32::abs(dx) {
             error += dx;
             current_y += sy;
+            coordinates.push(Point { x: current_x, y: current_y });
         }
-        coordinates.push(Point { x: current_x, y: current_y });
     }
+    println!("{:?}", coordinates);
     coordinates
 }
 
@@ -61,22 +64,35 @@ fn draw_line(line: std::vec::Vec<Point>, width: i32, height: i32) {
     //println!("{:?}", line);
 
     let total_n_points = line.len();
+    println!("{}", total_n_points);
     let mut this_point = 0;  
 
     for col in 0..height {
         let mut col_as_string: String = "".to_string();
 
         for row in 0..width {
+            let mut temp_row = false;
+            for i in this_point..total_n_points {
+                if line[i].x == row && line[i].y == col {
+                    col_as_string = format!("{}{}", col_as_string, "❖");
+                //println!("{:?}", line[this_point]);
+                    temp_row = true;
+                    this_point += 1;
+                    break;
+                
+                    } 
+            }
 
-            if this_point < total_n_points && line[this_point].x == row && line[this_point].y == col {
-                col_as_string = format!("{}{}", col_as_string, "❖");
-               // println!("{:?}", line[this_point]);
-                this_point += 1;
-            } else if col == 0 || col == (height - 1) || row == 0 || row == (width - 1) {
+            if col == 0 || col == (height - 1) || row == 0 || row == (width - 1) {
                 col_as_string = format!("{}{}", col_as_string, "☗");
-            } else {
+            } else if temp_row == false {
                 col_as_string = format!("{}{}", col_as_string, ".");
             }
+            
+            /*else {
+                col_as_string = format!("{}{}", col_as_string, ".");
+            }*/
+            
         }
         println!("{}", col_as_string);
 
