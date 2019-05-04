@@ -1,6 +1,5 @@
 //#[derive(Debug)]
 
-
 struct Point {
     x: i32,
     y: i32
@@ -63,11 +62,11 @@ fn draw_line(line: std::vec::Vec<Point>, width: i32, height: i32) {
     for col in 0..height {
         let mut col_as_string: String = "".to_string();
         for row in 0..width {
-            let mut temp_row = false;
+            let mut is_there_a_point = false;
             for i in this_point..total_n_points {
                 if line[i].x == row && line[i].y == col {
                     col_as_string = format!("{}{}", col_as_string, "❖");
-                    temp_row = true;
+                    is_there_a_point = true;
                     this_point += 1;
                     break;
                 } 
@@ -75,13 +74,11 @@ fn draw_line(line: std::vec::Vec<Point>, width: i32, height: i32) {
 
             if col == 0 || col == (height - 1) || row == 0 || row == (width - 1) {
                 col_as_string = format!("{}{}", col_as_string, "☗");
-            } else if temp_row == false {
+            } else if is_there_a_point == false {
                 col_as_string = format!("{}{}", col_as_string, ".");
             }
-            
         }
         println!("{}", col_as_string);
-
     }
 
 /*
