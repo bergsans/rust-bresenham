@@ -5,7 +5,7 @@ struct Point {
     y: i32
 }
 
-use clap::{ App,Arg };
+use clap::{ App, Arg };
 
 fn main() {
     let args = App::new("draw line")
@@ -68,11 +68,9 @@ fn main() {
         Err(_) => 30
     };
 
-    
     let result = get_coordinates(x1, y1, x2, y2);
     draw_line(result, w, h);
-
-    
+    get_lines();
 }
 
 fn get_coordinates(x1: i32, y1: i32, x2: i32, y2: i32) -> Vec<Point> {
@@ -130,4 +128,98 @@ fn draw_line(line: std::vec::Vec<Point>, width: i32, height: i32) {
         print!("\n");
     }
 }
+
+use std::io;
+fn get_lines() {
+
+    println!("Please input width: ");
+    let mut w_input = String::new();
+    io::stdin().read_line(&mut w_input)
+        .expect("Fail!");
+    let w:i32 = match w_input.trim().parse() {
+        Ok(n) => n,
+        Err(_) => 70
+    };
+    println!("Please input height: ");
+    let mut h_input = String::new();
+    io::stdin().read_line(&mut h_input)
+        .expect("Fail!");
+    let h:i32 = match h_input.trim().parse() {
+        Ok(n) => n,
+        Err(_) => 30
+    };
+
+    println!("----------------------");
+    let mut array_of_lines = vec![];
+
+    let mut is_loop = true;
+    while is_loop {
+        let mut temp_arr = vec![];
+        
+
+        for question in 0..4 {
+            let mut temp_input = String::new();
+            println!("Enter value {}", question);
+            io::stdin().read_line(&mut temp_input)
+                .expect("Fail!");
+
+            let value:i32 = match temp_input.trim().parse() {
+                Ok(n) => n,
+                Err(_) => -1
+            };
+            temp_arr.push(value);
+        }
+        array_of_lines.push(temp_arr);
+        let mut ask_for_another_line = String::new();
+        println!("Enter yes if you want to define another line: ");
+        io::stdin().read_line(&mut ask_for_another_line)
+            .expect("FAIL");
+        if ask_for_another_line == "yes".to_string() {
+             continue;
+        } else {
+            is_loop = false;
+        }
+    }
+    println!("END: {:?}", array_of_lines);
+    draw_lines(w, h, array_of_lines);
+}
+
+
+fn draw_lines(width: i32, height: i32, lines_coords: std::vec::Vec<std::vec::Vec<i32>>) {
+    //println!("{:?}", lines);
+    let mut lines: std::vec::Vec<std::vec::Vec<Point>>;
+    
+    /*
+    for line_coords in lines_coords {
+        let temp = get_coordinates(line_coords[0], line_coords[1], line_coords[2], line_coords[3]);
+        lines.push(temp);
+    }
+    
+    for col in 0..height {
+        for row in 0..width {
+            let mut is_point_in_line = false;
+            for line in &lines {
+                let temp_check = line.iter().any(| point| point.x == row && point.y == col);
+                match temp_check {
+                    true => is_point_in_line = true,
+                    _ => continue
+                }; 
+            }
+            match is_point_in_line {
+                true => print!("❖"),
+                _ => {
+                    if col == 0 || col == (height - 1) || row == 0 || row == (width - 1) {
+                        print!("☗");
+                    } else {
+                        print!(".");
+                    }
+                }
+            };
+        }
+        print!("\n");
+    
+    }
+    */
+}
+
 
