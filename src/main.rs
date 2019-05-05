@@ -6,6 +6,9 @@ struct Point {
 fn main() {
     let result = get_coordinates(1, 1, 69, 28);
     draw_line(result, 70, 30);
+
+    let result2 = get_coordinates(69, 1, 1, 28);
+    draw_line(result2, 70, 30);
 }
 
 fn get_coordinates(x1: i32, y1: i32, x2: i32, y2: i32) -> Vec<Point> {
