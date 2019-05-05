@@ -47,22 +47,20 @@ fn get_coordinates(x1: i32, y1: i32, x2: i32, y2: i32) -> Vec<Point> {
 
 fn draw_line(line: std::vec::Vec<Point>, width: i32, height: i32) {
     for col in 0..height {
-        let mut col_as_string: String = "".to_string();
         for row in 0..width {
-
             let is_point_in_line = line.iter().any(| point| point.x == row && point.y == col);
             match is_point_in_line {
-                true => col_as_string = format!("{}{}", col_as_string, "❖"),
+                true => print!("❖"),
                 _ => {
                     if col == 0 || col == (height - 1) || row == 0 || row == (width - 1) {
-                        col_as_string = format!("{}{}", col_as_string, "☗");
+                        print!("☗");
                     } else {
-                        col_as_string = format!("{}{}", col_as_string, ".");
+                        print!(".");
                     }
                 }
             };
         }
-        println!("{}", col_as_string);
+        print!("\n");
     }
 }
 
