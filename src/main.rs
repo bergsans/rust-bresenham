@@ -4,15 +4,8 @@ struct Point {
 }
 
 fn main() {
-    
- //   let result1 = get_coordinates(10, 10, 1, 20);
- //   draw_line(result1, 70, 30);
-
-    let result2 = get_coordinates(1, 1, 69, 28);
-    draw_line(result2, 70, 30);
-
- //   let result3 = get_coordinates(1, 28, 30, 15);
- //   draw_line(result3, 70, 30);
+    let result = get_coordinates(1, 1, 69, 28);
+    draw_line(result, 70, 30);
 }
 
 fn get_coordinates(x1: i32, y1: i32, x2: i32, y2: i32) -> Vec<Point> {
@@ -52,25 +45,24 @@ fn get_coordinates(x1: i32, y1: i32, x2: i32, y2: i32) -> Vec<Point> {
     coordinates
 }
 
-fn draw_line(mut line: std::vec::Vec<Point>, width: i32, height: i32) {
+fn draw_line(line: std::vec::Vec<Point>, width: i32, height: i32) {
     for col in 0..height {
         let mut col_as_string: String = "".to_string();
         for row in 0..width {
-            let mut is_there_a_point = false;
-            for i in 0..line.len() {
-                if line[i].x == row && line[i].y == col {
-                    col_as_string = format!("{}{}", col_as_string, "❖");
-                    is_there_a_point = true;
-                    line.remove(i);
-                    break;
-                } 
-            }
-            if col == 0 || col == (height - 1) || row == 0 || row == (width - 1) {
-                col_as_string = format!("{}{}", col_as_string, "☗");
-            } else if is_there_a_point == false {
-                col_as_string = format!("{}{}", col_as_string, ".");
-            }
+
+            let is_point_in_line = line.iter().any(| point| point.x == row && point.y == col);
+            match is_point_in_line {
+                true => col_as_string = format!("{}{}", col_as_string, "❖"),
+                _ => {
+                    if col == 0 || col == (height - 1) || row == 0 || row == (width - 1) {
+                        col_as_string = format!("{}{}", col_as_string, "☗");
+                    } else {
+                        col_as_string = format!("{}{}", col_as_string, ".");
+                    }
+                }
+            };
         }
         println!("{}", col_as_string);
     }
 }
+
