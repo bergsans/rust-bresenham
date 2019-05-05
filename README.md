@@ -1,16 +1,14 @@
-# rust-bresenham
+# Implementation of the Bresenham Line Algorithm (Rust)
 
-command-line: 
+
+## Usage:
+ 
+``` 
+cargo run -- 1 1 69 28 70 30
 ```
-dev-mode: cargo run -- 1 2 3 4
+
+## Output
 ```
-
-```
-let result2 = get_coordinates(1, 1, 69, 28);
-draw_line(result2, 70, 30);
-
-
-output:
 ☗☗☗☗☗☗☗☗☗☗☗☗☗☗☗☗☗☗☗☗☗☗☗☗☗☗☗☗☗☗☗☗☗☗☗☗☗☗☗☗☗☗☗☗☗☗☗☗☗☗☗☗☗☗☗☗☗☗☗☗☗☗☗☗☗☗☗☗☗☗
 ☗❖❖❖.................................................................☗
 ☗..❖❖❖...............................................................☗
