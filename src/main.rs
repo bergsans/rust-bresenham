@@ -1,4 +1,7 @@
+
 extern crate clap;
+#[derive(Debug)]
+
 
 struct Point {
     x: i32,
@@ -68,8 +71,8 @@ fn main() {
         Err(_) => 30
     };
 
-    let result = get_coordinates(x1, y1, x2, y2);
-    draw_line(result, w, h);
+  //  let result = get_coordinates(x1, y1, x2, y2);
+  //  draw_line(result, w, h);
     get_lines();
 }
 
@@ -169,41 +172,39 @@ fn get_lines() {
             };
             temp_arr.push(value);
         }
-        array_of_lines.push(temp_arr);
+        let mut value = get_coordinates(temp_arr[0], temp_arr[1], temp_arr[2], temp_arr[3]);
+        
+        array_of_lines.push(value);
+    //    println!("{:?}", array_of_lines);
         let mut ask_for_another_line = String::new();
         println!("Enter yes if you want to define another line: ");
         io::stdin().read_line(&mut ask_for_another_line)
             .expect("FAIL");
-        if ask_for_another_line == "yes".to_string() {
-             continue;
-        } else {
-            is_loop = false;
-        }
+        match ask_for_another_line.trim() == "yes" {
+            true => continue,
+            _ => is_loop = false
+        };
     }
-    println!("END: {:?}", array_of_lines);
     draw_lines(w, h, array_of_lines);
 }
 
+fn draw_lines(width: i32, height: i32, lines: std::vec::Vec<std::vec::Vec<Point>>) {
+   
 
-fn draw_lines(width: i32, height: i32, lines_coords: std::vec::Vec<std::vec::Vec<i32>>) {
     //println!("{:?}", lines);
-    let mut lines: std::vec::Vec<std::vec::Vec<Point>>;
     
-    /*
-    for line_coords in lines_coords {
-        let temp = get_coordinates(line_coords[0], line_coords[1], line_coords[2], line_coords[3]);
-        lines.push(temp);
-    }
     
     for col in 0..height {
         for row in 0..width {
             let mut is_point_in_line = false;
+
             for line in &lines {
+
                 let temp_check = line.iter().any(| point| point.x == row && point.y == col);
-                match temp_check {
-                    true => is_point_in_line = true,
-                    _ => continue
-                }; 
+                if temp_check == true {
+                    is_point_in_line = true;
+                    break;
+                } 
             }
             match is_point_in_line {
                 true => print!("❖"),
@@ -219,7 +220,7 @@ fn draw_lines(width: i32, height: i32, lines_coords: std::vec::Vec<std::vec::Vec
         print!("\n");
     
     }
-    */
+    
 }
 
 
