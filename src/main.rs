@@ -1,9 +1,36 @@
+extern crate clap;
+
 struct Point {
     x: i32,
     y: i32
 }
 
+use clap::{ App,Arg };
+
 fn main() {
+    let args = App::new("draw line")
+        .version("0.0.1")
+        .about("Drawes a line")
+        .arg(Arg::with_name("x1") 
+             .takes_value(true)
+             .required(true))
+        .arg(Arg::with_name("y1")
+             .takes_value(true)
+             .required(true))
+        .arg(Arg::with_name("x2")
+             .takes_value(true)
+             .required(true))
+        .arg(Arg::with_name("y2")
+             .takes_value(true)
+             .required(true))
+        .get_matches();
+
+    let x1 = args.value_of("x1").unwrap();
+    let y1 = args.value_of("y1").unwrap();
+    let x2 = args.value_of("x2").unwrap();
+    let y2 = args.value_of("y2").unwrap();
+    println!("{} {} {} {}", x1, y1, x2, y2);
+
     let result = get_coordinates(1, 1, 69, 28);
     draw_line(result, 70, 30);
 
