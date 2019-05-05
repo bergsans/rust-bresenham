@@ -23,19 +23,56 @@ fn main() {
         .arg(Arg::with_name("y2")
              .takes_value(true)
              .required(true))
+        .arg(Arg::with_name("width")
+             .takes_value(true)
+             .required(true))
+        .arg(Arg::with_name("height")
+             .takes_value(true)
+             .required(true))
         .get_matches();
+    
+    let x1:i32 = match args.value_of("x1").unwrap().parse() {
+        Ok(n) => n,
+        Err(_) => 1
+    };
+    let y1:i32 = match args.value_of("y1").unwrap().parse() {
+        Ok(n) => n,
+        Err(_) => 1
+    };
+    let x2:i32 = match args.value_of("x2").unwrap().parse() {
+        Ok(n) => n,
+        Err(_) => 1
+    };
+    let y2:i32 = match args.value_of("y2").unwrap().parse() {
+        Ok(n) => n,
+        Err(_) => 1
+    };
+    let w:i32 = match args.value_of("width").unwrap().parse() {
+        Ok(n) =>    {
+                        if n >= 10 && n <= 100 {
+                            n
+                        } else {
+                            70
+                        }
+                    },
+        Err(_) => 70
+    };
+    let h:i32 = match args.value_of("height").unwrap().parse() {
+        Ok(n) =>    {
+                        if n > 10 && n < 100 {
+                            n
+                        } else {
+                            30
+                        }
+                    },
+        Err(_) => 30
+    };
 
-    let x1 = args.value_of("x1").unwrap();
-    let y1 = args.value_of("y1").unwrap();
-    let x2 = args.value_of("x2").unwrap();
-    let y2 = args.value_of("y2").unwrap();
-    println!("{} {} {} {}", x1, y1, x2, y2);
+    
+    let result = get_coordinates(x1, y1, x2, y2);
+    draw_line(result, w, h);
 
-    let result = get_coordinates(1, 1, 69, 28);
-    draw_line(result, 70, 30);
-
-    let result2 = get_coordinates(69, 1, 1, 28);
-    draw_line(result2, 70, 30);
+    
 }
 
 fn get_coordinates(x1: i32, y1: i32, x2: i32, y2: i32) -> Vec<Point> {
